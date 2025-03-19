@@ -36,7 +36,7 @@ final class Success<T> extends Status<T> {
   final T value;
 
   @override
-  String toString() => 'Status<$T>.Success($value)';
+  String toString() => '$value';
 }
 
 final class Nome<T> extends Status<T> {

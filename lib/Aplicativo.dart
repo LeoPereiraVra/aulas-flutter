@@ -1,4 +1,5 @@
 import 'package:app/view/LoginView.dart';
+import 'package:app/view/splash.dart';
 import 'package:flutter/material.dart';
 
 class Aplicativo extends StatelessWidget {
@@ -37,7 +38,7 @@ class Aplicativo extends StatelessWidget {
         ),
         textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.black)
       ),
-      home: LoginView(),
+      home: SplashView(),
     );
   }
 }

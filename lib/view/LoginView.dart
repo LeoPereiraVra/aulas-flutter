@@ -1,4 +1,5 @@
 import 'package:app/util/status.dart';
+import 'package:app/view/HomeView.dart';
 import 'package:app/viewmodel/LoginViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +12,6 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,17 +36,17 @@ class _LoginViewState extends State<LoginView> {
               ),
               Container(
                 margin: EdgeInsets.only(bottom: 30),
-                child: TextField(                  
+                child: TextField(
                   decoration: InputDecoration(prefixIcon: Icon(Icons.person)),
                   onChanged: context.read<LoginViewModel>().setLogin,
                 ),
               ),
               Container(
                 margin: EdgeInsets.only(bottom: 30),
-                child: TextField(                  
+                child: TextField(
                   obscureText: true,
                   decoration: InputDecoration(prefixIcon: Icon(Icons.lock)),
-                  onChanged: (value){
+                  onChanged: (value) {
                     context.read<LoginViewModel>().setSenha(value);
                   },
                 ),
@@ -58,13 +58,18 @@ class _LoginViewState extends State<LoginView> {
                   } else if (viewModel.status is Erro) {
                     return Text(viewModel.status.toString());
                   } else if (viewModel.status is Success) {
-                    return Text(viewModel.status.toString());
-                  }else{
-                    return Container();
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeView()),
+                      );
+                    });
                   }
+                  return Container();
+                  
                 },
               ),
-              Divider(height: 20,color: Colors.transparent,),
+              Divider(height: 20, color: Colors.transparent),
               ElevatedButton(
                 onPressed: () {
                   context.read<LoginViewModel>().logar();
